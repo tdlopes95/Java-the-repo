@@ -147,12 +147,9 @@ public class Main {
 
         for (int i = 0; i < pessoas; i++) {
             // verificacao dos limites para uma pessoa
-            int minMood = 5;
+            final int MIN_MOOD = 1;
             int maxMood = 1;
             for (int j = 0; j < dias; j++) {
-                if (moodData[i][j] < minMood) {
-                    minMood = moodData[i][j];
-                }
                 if (moodData[i][j] > maxMood) {
                     maxMood = moodData[i][j];
                 }
@@ -162,7 +159,7 @@ public class Main {
             escrita.printf("Person #%d:%n", i + 1);
 
             // impressao
-            for (int mood = maxMood; mood >= minMood; mood--) {
+            for (int mood = maxMood; mood >= MIN_MOOD; mood--) {
                 System.out.printf("%4d |", mood);
                 escrita.printf("%4d |", mood);
                 for (int j = 0; j < dias; j++) {
@@ -444,7 +441,6 @@ public class Main {
             System.out.println("Pessoa nº"+(i+1)+": ");
             for (int j = 0; j < dias; j++) {
                 do { moodData[i][j] = ler.nextInt(); } while (moodData[i][j] < 1 && moodData[i][j] > 5);
-                moodData[i][j] = ler.nextInt();
             }
         }
 
