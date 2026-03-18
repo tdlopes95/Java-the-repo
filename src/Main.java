@@ -10,31 +10,51 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         String validador="";
         String mood;
+        int escolha;
 
         Scanner ler = new Scanner(System.in);
         validador = intro();
 
         while(!validador.equalsIgnoreCase("N")){
 
-            System.out.println("Insira o nome do moodmap que deseja ler: (ex:mood_nov.txt)");
-            mood= ler.nextLine();
-            int[][] moodData = lerMood(mood);           // a)
 
-            //printwriter
-            String nomeFicheiro = mood.replace(".txt", "_analysis.txt");
-            escrita = new PrintWriter(new File("output/" + nomeFicheiro));
+            System.out.println("Como deseja proceder? 1-Inserção Manual  2-Através de Ficheiro");
+            do { escolha = ler.nextInt(); } while (escolha != 1 && escolha != 2);
+            ler.nextLine();
 
-            visualizarMoodMap(moodData);                // b)
-            double[] mediaDia = mediaPorDia(moodData);  // c)
-            mediaPorPessoa(moodData);                   // d)
-            diasMaiorHumor(moodData, mediaDia);         // e)
-            percentagemNiveis(moodData);                // f)
+            int[][] moodData;
+            String nomeFicheiro = "";
+
+            if(escolha == 1){
+                moodData = insertMood();
+
+                //printwriter
+                nomeFicheiro = (titulo+"_analysis.txt");
+                escrita = new PrintWriter(new File("output/" + nomeFicheiro));
+
+            }else{
+                System.out.println("Insira o nome do moodmap que deseja ler: (ex:mood_nov.txt)");
+                mood = ler.nextLine();
+                moodData = lerMood(mood);           // a)
+
+                //printwriter
+                nomeFicheiro = mood.replace(".txt", "_analysis.txt");
+                escrita = new PrintWriter(new File("output/" + nomeFicheiro));
+            }
+
+            visualizarMoodMap(moodData);                                     // b)
+            double[] mediaDia = mediaPorDia(moodData);                       // c)
+            mediaPorPessoa(moodData);                                        // d)
+            diasMaiorHumor(moodData, mediaDia);                              // e)
+            percentagemNiveis(moodData);                                     // f)
             int[] maxConsecutivoPorPessoa = transtornoEmocional(moodData);   // g)
-            graficoPorPessoa(moodData);                 // h)
-            pessoasTerapia(moodData, maxConsecutivoPorPessoa);                   // i)
-            humorSemelhante(moodData);                  // j)
+            graficoPorPessoa(moodData);                                      // h)
+            pessoasTerapia(moodData, maxConsecutivoPorPessoa);               // i)
+            humorSemelhante(moodData);                                       // j)
+
 
             escrita.close();
+            System.out.println("\n");
             System.out.printf("Analysis saved to output/%s\n", nomeFicheiro);
 
             System.out.println("Deseja Continuar? (S/N)");
@@ -48,6 +68,7 @@ public class Main {
         }
 
     }
+
     /*****************************************************
      ************** j) Humor semelhante ******************
      *****************************************************/
@@ -80,11 +101,11 @@ public class Main {
         System.out.print("\nj) People with the most similar moods: ");
         escrita.print("\nj) People with the most similar moods: ");
         if (maxIguais == 0) {
-            System.out.println("there aren't people with similar moods.");
-            escrita.println("there aren't people with similar moods.");
+            System.out.print("there aren't people with similar moods.");
+            escrita.print("there aren't people with similar moods.");
         } else {
-            System.out.printf("(Person #%d and Person #%d have the same mood on %d days)\n", pessoa_1 + 1, pessoa_2 + 1, maxIguais);
-            escrita.printf("(Person #%d and Person #%d have the same mood on %d days)\n", pessoa_1 + 1, pessoa_2 + 1, maxIguais);
+            System.out.printf("(Person #%d and Person #%d have the same mood on %d days)", pessoa_1 + 1, pessoa_2 + 1, maxIguais);
+            escrita.printf("(Person #%d and Person #%d have the same mood on %d days)", pessoa_1 + 1, pessoa_2 + 1, maxIguais);
         }
     }
     /*****************************************************
@@ -388,7 +409,47 @@ public class Main {
         }
 
     }
+    /*****************************************************
+     ****** a.2) Inserir Manualmente MoodMap *************
+     *****************************************************/
+    private static int [][] insertMood() {
+        int pessoas,dias;
+        Scanner ler = new Scanner(System.in);
 
+
+        System.out.println("Digite o nome do Departamento/Equipa que está a analisar: (sem espaços)");
+        titulo = ler.next();
+        System.out.println("Digite o número de pessoas em análise: ");
+        do {
+            while (!ler.hasNextInt()) {
+                System.out.println("Erro: Deve inserir um número inteiro!");
+                ler.next();
+            }
+            pessoas = ler.nextInt();
+        } while (pessoas < 1 );
+        System.out.println("Digite o número de dias em análise: ");
+        do {
+            while (!ler.hasNextInt()) {
+                System.out.println("Erro: Deve inserir um número inteiro!");
+                ler.next();
+            }
+            dias = ler.nextInt();
+        } while (dias < 1 );
+
+
+        int[][] moodData = new int[pessoas][dias];
+
+        System.out.println("Digite os valores de Mood para cada dia (pessoa a pessoa)");
+        for (int i = 0; i < pessoas; i++) {
+            System.out.println("Pessoa nº"+(i+1)+": ");
+            for (int j = 0; j < dias; j++) {
+                do { moodData[i][j] = ler.nextInt(); } while (moodData[i][j] < 1 && moodData[i][j] > 5);
+                moodData[i][j] = ler.nextInt();
+            }
+        }
+
+        return moodData;
+    }
     /*****************************************************
      ************** a) Ler MoodMap ***********************
      *****************************************************/
@@ -418,8 +479,10 @@ public class Main {
         String valid;
         Scanner ler = new Scanner(System.in);
 
-        System.out.printf("Leitor de MoodMap.\n" +
-                "Deseja Iniciar? (S/N)\n");
+        System.out.print("""
+                Leitor de MoodMap.
+                Deseja Iniciar? (S/N)
+                """);
         do { valid = ler.next(); } while (!valid.equalsIgnoreCase("S") && !valid.equalsIgnoreCase("N"));
         return valid;
     }

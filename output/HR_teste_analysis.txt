@@ -1,0 +1,50 @@
+
+ HR_teste 
+b) Mood (level/day(person)
+day        :   1   2   3
+-----------|---|---|---|
+Person #1  :   1   2   3
+Person #2  :   4   5   1
+
+c) Average mood each day:
+day        :   1   2   3
+-----------|---|---|---|
+mood         2,5 3,5 2,0
+
+d) Average of each person's mood: 
+Person #1  : 2,0
+Person #2  : 3,3
+
+e) Days with the highest average mood (3,5)  :  1 
+
+f) Percentage of mood levels:
+Mood #5: 16,7%
+Mood #4: 16,7%
+Mood #3: 16,7%
+Mood #2: 16,7%
+Mood #1: 33,3%
+
+g) People with emotional disorders:
+Person #1 : 2 consecutive days
+
+h) People's Mood Level Charts:
+Person #1:
+   3 |  *
+   2 | * 
+   1 |*  
+Mood +---
+     0    
+
+Person #2:
+   5 | * 
+   4 |*  
+   3 |   
+   2 |   
+   1 |  *
+Mood +---
+     0    
+
+i) Recommended therapy:
+Person #1 : Listen to music
+
+j) People with the most similar moods: there aren't people with similar moods.
