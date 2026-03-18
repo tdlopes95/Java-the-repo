@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.io.PrintWriter;
 
-public class Main {
+public class PedroOliveira_TorcatoLopes {
     static String titulo = "";
     static PrintWriter escrita = null;
 
@@ -335,8 +335,8 @@ public class Main {
         System.out.printf("%-11s:", "day"); //cabeçalho
         escrita.printf("%-11s:", "day");
         for (int j = 0; j < dias; j++) {
-            System.out.printf("%4d", j+1);
-            escrita.printf("%4d", j+1);
+            System.out.printf("%3d ", j+1);
+            escrita.printf("%3d ", j+1);
         }
         System.out.println();
         escrita.println();
@@ -355,8 +355,8 @@ public class Main {
         System.out.printf("%-12s", "mood"); //medias
         escrita.printf("%-12s", "mood");
         for (int j = 0; j < dias; j++) {
-            System.out.printf("%4.1f", mediaDiaria[j]);
-            escrita.printf("%4.1f", mediaDiaria[j]);
+            System.out.printf("%3.1f ", mediaDiaria[j]);
+            escrita.printf("%3.1f ", mediaDiaria[j]);
         }
         System.out.println();
         escrita.println();
