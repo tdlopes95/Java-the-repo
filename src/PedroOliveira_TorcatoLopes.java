@@ -3,6 +3,9 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.io.PrintWriter;
 
+    // Torcato: a), c), e), g), i)
+    // Pedro: b), d), f), h), j)
+
 public class PedroOliveira_TorcatoLopes {
     static String titulo = "";
     static PrintWriter escrita = null;
@@ -41,16 +44,16 @@ public class PedroOliveira_TorcatoLopes {
                 nomeFicheiro = mood.replace(".txt", "_analysis.txt");
                 escrita = new PrintWriter(new File("output/" + nomeFicheiro));
             }
-
-            visualizarMoodMap(moodData);                                     // b)
-            double[] mediaDia = mediaPorDia(moodData);                       // c)
-            mediaPorPessoa(moodData);                                        // d)
-            diasMaiorHumor(moodData, mediaDia);                              // e)
-            percentagemNiveis(moodData);                                     // f)
-            int[] maxConsecutivoPorPessoa = transtornoEmocional(moodData);   // g)
-            graficoPorPessoa(moodData);                                      // h)
-            pessoasTerapia(moodData, maxConsecutivoPorPessoa);               // i)
-            humorSemelhante(moodData);                                       // j)
+                                                                             // a) Torcato
+            visualizarMoodMap(moodData);                                     // b) Pedro
+            double[] mediaDia = mediaPorDia(moodData);                       // c) Torcato
+            mediaPorPessoa(moodData);                                        // d) Pedro
+            diasMaiorHumor(moodData, mediaDia);                              // e) Torcato
+            percentagemNiveis(moodData);                                     // f) Pedro
+            int[] maxConsecutivoPorPessoa = transtornoEmocional(moodData);   // g) Torcato
+            graficoPorPessoa(moodData);                                      // h) Pedro
+            pessoasTerapia(moodData, maxConsecutivoPorPessoa);               // i) Torcato
+            humorSemelhante(moodData);                                       // j) Pedro
 
 
             escrita.close();
